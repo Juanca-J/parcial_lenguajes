@@ -1,0 +1,46 @@
+{%extends 'base.html'%}
+
+{%block content%}
+
+<div class="center">
+    <style>
+        table {
+          width: 500px;
+        }
+        h2{
+            margin: 20px;
+        }
+    </style>
+	<div>
+        <h2>Lista de seguros</h2>
+    </div>
+	{% if tipo_seguro %}
+    <ul class="tipo_seguro">
+        {% for seguros in tipo_seguro %}
+        
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 100%;">Nombre</th>
+                            <th style="width: 100%;">Opciones</th>
+                        </tr>
+                    </thead>
+                    <tr>
+                        <td>
+                            <a href="#" class="{% if seguros.completed%}completed{%endif%}">{{ seguros.nombre }}</a>
+                        </td>
+                        <td>
+                            <a href="{%url "seguros-delete" seguros.id %}"><i class="bi bi-trash"></i> </a>
+                            <a href="{%url "seguros-update" seguros.id %}"><i class="bi bi-pencil-square"></i></a>
+                        
+                        </td>
+                    </tr>
+                    <hr>
+                </table>
+        {% endfor %}
+    {% else %}
+        <p>¡no tienes registros!</p>
+    {% endif %}
+	</ul>
+</div>
+{%endblock content%}

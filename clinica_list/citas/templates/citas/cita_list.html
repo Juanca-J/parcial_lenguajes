@@ -1,0 +1,79 @@
+{%extends 'base.html'%}
+
+{%block content%}
+
+<div class="center">
+    <style>
+        h2{
+            margin: 20px;
+        }
+        .tableC{
+            border-bottom: 1px solid black;
+        }
+        table{
+            width: 720px;
+        }
+        a{
+            text-decoration: none;
+        }
+        .formPa{
+            align-items: center;
+            text-align: center;
+        }
+    </style>
+	<div>
+        <h2>Lista de citas</h2>
+    </div>
+	{% if citas %}
+    <ul class="citas">
+        
+        <table>
+            <thead>
+                <tr class="tableC">
+                    <th style="width: 15%;">Paciente</th>
+                    <th style="width: 20%;">Doctor</th>
+                    <th style="width: 20%;">Especialidad</th>
+                    <th style="width: 15%;">Usuario</th>
+                    <th style="width: 20%;">Fecha</th>
+                    <th style="width: 15%;">Hora</th>
+                    <th style="width: 10%;">Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cita in citas %}
+                <tr>
+                    <td>
+                        <a href="#" class="{% if cita.completed%}completed{%endif%}">{{ cita.paciente }}</a>
+                    </td>
+                    <td>
+                        <a href="#" class="{% if cita.completed%}completed{%endif%}">{{ cita.doctor }}</a>
+                    </td>
+                    <td>
+                        <a href="#" class="{% if cita.completed%}completed{%endif%}">{{ cita.especialidad }}</a>
+                    </td>
+                    <td>
+                        <a href="#" class="{% if cita.completed%}completed{%endif%}">{{ cita.user }}</a>
+                    </td>
+                    <td>
+                        <a href="#" class="{% if cita.completed%}completed{%endif%}">{{ cita.fecha }}</a>
+                    </td>
+                    <td>
+                        <a href="#" class="{% if cita.completed%}completed{%endif%}">{{ cita.hora }}</a>
+                    </td>
+                    <td class="formPa">
+                        <a href="{%url "cita-delete" cita.id %}"><i class="bi bi-trash"></i> </a>
+                        <a href="{%url "cita-update" cita.id %}"><i class="bi bi-pencil-square"></i></a>
+                     
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+                
+        </table>
+        
+    {% else %}
+        <p>🎉 Hey!!! que bien no tienes tareas pendientes</p>
+    {% endif %}
+	</ul>
+</div>
+{%endblock content%}

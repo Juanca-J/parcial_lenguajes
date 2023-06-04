@@ -1,0 +1,45 @@
+{%extends 'base.html'%}
+
+{%block content%}
+
+<div class="center">
+    <style>
+        table {
+          width: 500px;
+        }
+        h2{
+            margin: 20px;
+        }
+    </style>
+	<div>
+        <h2>Lista de doctores</h2>
+    </div>
+	{% if doctor %}
+    <ul class="doctor">
+        {% for doctores in doctor %}
+        
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 100%;">Nombre</th>
+                            <th style="width: 100%;">Opciones</th>
+                        </tr>
+                    </thead>
+                    <tr>
+                        <td>
+                            <a href="#" class="{% if doctores.completed%}completed{%endif%}">{{ doctores.nombre }}</a>
+                        </td>
+                        <td>
+                            <a href="{%url "doctor-delete" doctores.id %}"><i class="bi bi-trash"></i> </a>
+                            <a href="{%url "doctor-update" doctores.id %}"><i class="bi bi-pencil-square"></i></a>
+                        </td>
+                    </tr>
+                    <hr>
+                </table>
+        {% endfor %}
+    {% else %}
+        <p>🎉 Hey!!! que bien no tienes tareas pendientes</p>
+    {% endif %}
+	</ul>
+</div>
+{%endblock content%}

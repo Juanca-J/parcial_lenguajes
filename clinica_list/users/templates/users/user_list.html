@@ -1,0 +1,79 @@
+{%extends 'base.html'%}
+
+{%block content%}
+
+<div class="center">
+    <style>
+        h2{
+            margin: 20px;
+        }
+        .tableC{
+            border-bottom: 1px solid black;
+        }
+        table{
+            width: 720px;
+        }
+        a{
+            text-decoration: none;
+        }
+        .formPa{
+            align-items: center;
+            text-align: center;
+        }
+    </style>
+	<div>
+        <h2>Lista de usuarios</h2>
+    </div>
+	{% if users %}
+    <ul class="users">
+        
+        <table>
+            <thead>
+                <tr class="tableC">
+                    <th style="width: 15%;">Username</th>
+                    <th style="width: 20%;">Fullname</th>
+                    <th style="width: 20%;">Email</th>
+                    {% comment %} <th style="width: 15%;">Usuario</th> {% endcomment %}
+                    <th style="width: 20%;">Ultimo acceso</th>
+                    <th style="width: 10%;">Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for usuario in users %}
+                <tr>
+                    <td>
+                        <a href="#" class="{% if usuario.completed%}completed{%endif%}">{{ usuario.username }}</a>
+                    </td>
+                    <td>
+                        <a href="#" class="{% if usuario.completed%}completed{%endif%}">{{ usuario.full_name }}</a>
+                    </td>
+                    <td>
+                        <a href="#" class="{% if usuario.completed%}completed{%endif%}">{{ usuario.email }}</a>
+                    </td>
+                    {% comment %} <td>
+                        <a href="#" class="{% if usuario.completed%}completed{%endif%}">{{ usuario.telefono }}</a>
+                    </td> {% endcomment %}
+                    <td>
+                        <a href="#" class="{% if usuario.completed%}completed{%endif%}">{{ usuario.last_login }}</a>
+                    </td>
+                    <td class="formPa">
+                        {% comment %} <a href="{%url "cita-delete" cita.id %}"><i class="bi bi-trash"></i> </a>{% endcomment %}
+                        {%if usuario.is_superuser%}
+                            <h4></h4>
+                        {% else %}
+                            <a href="{%url "user-update" usuario.username %}"><i class="bi bi-pencil-square"></i></a> 
+                        {%endif%}
+
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+                
+        </table>
+        
+    {% else %}
+        <p>🎉 Hey!!! que bien no tienes tareas pendientes</p>
+    {% endif %}
+	</ul>
+</div>
+{%endblock content%}

@@ -1,0 +1,76 @@
+{%extends 'base.html'%}
+
+{%block content%}
+
+<div class="center">
+    <style>
+        table {
+          width: 500px;
+        }
+        h2{
+            margin: 20px;
+        }
+        a{
+            text-decoration: none;
+        }
+        .formPa{
+            align-items: center;
+            text-align: center;
+        }
+        .tableC{
+            border-bottom: 1px solid black;
+        }
+        
+    </style>
+	<div>
+        <h2>Lista de pacientes</h2>
+    </div>
+	{% if paciente %}
+    <ul class="paciente">
+       
+        <table>
+            <thead>
+                <tr class="tableC">
+                    <th style="width: 20%;">Nombre</th>
+                    <th style="width: 20%;">Documento</th>
+                    <th style="width: 20%;">Nacimiento</th>
+                    <th style="width: 20%;">Seguro</th>
+                    <th style="width: 5%;">Opciones</th>
+                </tr>
+                
+            </thead>
+            <br>
+            
+            <tbody>
+                {% for pacientes in paciente %}
+                    <tr>
+                        
+                        <td>
+                            <a href="#" class="{% if pacientes.completed%}completed{%endif%}">{{ pacientes.nombre }}</a>
+                        </td>
+                        <td>
+                            <a href="#" class="{% if pacientes.completed%}completed{%endif%}">{{ pacientes.numero_documento }}</a>
+                        </td>
+                        <td>
+                            <a href="#" class="{% if pacientes.completed%}completed{%endif%}">{{ pacientes.fecha_nacimiento }}</a>
+                        </td>
+                        <td>
+                            <a href="#" class="{% if pacientes.completed%}completed{%endif%}">{{ pacientes.tipo_seguro }}</a>
+                        </td>
+                        <td class="formPa">
+                        {% comment %}   <a href="{%url "paciente-delete" especialidades.id %}"><i class="bi bi-trash"></i> </a> {% endcomment %}
+                            <a href="{%url "paciente-update" pacientes.id %}"><i class="bi bi-pencil-square"></i></a>
+                        
+                        </td>
+                        
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+    {% else %}
+        <p>¡no tienes registros!</p>
+    {% endif %}
+	</ul>
+</div>
+{%endblock content%}

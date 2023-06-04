@@ -1,0 +1,46 @@
+{%extends 'base.html'%}
+
+{%block content%}
+
+<div class="center">
+    <style>
+        table {
+          width: 500px;
+        }
+        h2{
+            margin: 20px;
+        }
+    </style>
+	<div>
+        <h2>Lista de tipos de documento</h2>
+    </div>
+	{% if tipo_documento %}
+    <ul class="tipo_documento">
+        {% for documentos in tipo_documento %}
+        
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 100%;">Nombre</th>
+                            <th style="width: 100%;">Opciones</th>
+                        </tr>
+                    </thead>
+                    <tr>
+                        <td>
+                            <a href="#" class="{% if documentos.completed%}completed{%endif%}">{{ documentos.nombre }}</a>
+                        </td>
+                        <td>
+                            <a href="{%url "documento-delete" documentos.id %}"><i class="bi bi-trash"></i> </a>
+                            <a href="{%url "documento-update" documentos.id %}"><i class="bi bi-pencil-square"></i></a> 
+                            
+                        </td>
+                    </tr>
+                    <hr>
+                </table>
+        {% endfor %}
+    {% else %}
+        <p>¡no tienes registros!</p>
+    {% endif %}
+	</ul>
+</div>
+{%endblock content%}
