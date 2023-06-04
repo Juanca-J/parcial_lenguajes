@@ -10,7 +10,7 @@
 	</style>
  <form method="post" novalidate class="card">
  	{%csrf_token %}
- 	<h2>{% if cita %} Update {%else %} Crear {%endif%} cita</h2>
+ 	<h2>{% if cita %} Actualizar {%else %} Crear {%endif%} cita</h2>
 	{% for field in form %}
 		{% if field.name == 'completed' %}
 			<p>
